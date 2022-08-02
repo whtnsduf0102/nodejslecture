@@ -6,7 +6,7 @@ app.set('port', process.env.PORT || 3000);
 
 app.get('/', (req, res) => {
     // res.send('Hello, Express');
-    res.sendFile(path.join(__dirname, '/index.html')); //path 모듈을 사용
+    res.sendFile(path.join(__dirname, '/index.html')); //path 모듈을 사용 html 서빙
 });
 
 app.listen(app.get('port'), () => {
