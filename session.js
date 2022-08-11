@@ -10,7 +10,7 @@ const parseCookies = (cookie = '') =>
     .reduce((acc, [k, v]) => {
         acc[k.trim()] = decodeURIComponent(v);
         return acc;
-    }, {});
+    }, {}); //함수
 
 const session = {};
 

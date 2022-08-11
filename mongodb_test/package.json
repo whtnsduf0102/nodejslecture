@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^6.5.2",
+    "morgan": "^1.10.0",
+    "nunjucks": "^3.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "name": "learn-mongoose",
+  "version": "0.0.1",
+  "description": "몽구스를 배우자",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "syCho",
+  "license": "MIT"
+}
