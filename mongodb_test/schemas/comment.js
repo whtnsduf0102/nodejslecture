@@ -6,7 +6,7 @@ const commentSchema = new Schema({
     commenter: {
         type: ObjectId,
         required: true,
-        ref: 'User',
+        ref: 'User',    //user 스키마의 underscoreID 를 가리킴 join과 비슷한 기능임.
     },
     comment: {
         type: String,

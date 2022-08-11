@@ -68,19 +68,23 @@ app.post('/upload', upload.single('image1'), (req, res) => { //아래 주석 참
 //     res.send('ok');
 // });
 /*============================================================================*/
-//   -->upload.none() 파일은 업로드 하지 않을때 => 언제쓰이는지 정확히 모르겠음.
+//   -->upload.none() 파일은 업로드 하지 않을때 
+//        => view에서 <input type="file" name="image1" /> 이 하나도 없는데 
+//           enctype="multipart/form-data" 일때
+//           const formData = new formData(); 를 썼을때 
+//           이론적으로 존재 할수 있음 -> formData를 해석할수 없어 multer로 해석해야 함.
 // app.post('/upload', upload.none(), (req, res) => { 
 //     console.log(req.body);
 //     res.send('ok');
 // });
 /*============================================================================*/
-//   -->upload.array('many') 하나의 요청 body 이름 아래 여러파일이 있는 경우
-// app.post('/upload', upload.array('many'), (req, res) => { 
+//   -->upload.array('many') 하나의 요청 body 이름 아래 여러파일이 있는 경우 -> image가 여러개일때
+// app.post('/upload', upload.array('image'), (req, res) => { 
 //     console.log(req.file, req.body);
 //     res.send('ok');
 // });
 /*============================================================================*/
-//   -->upload.fields( [{ name:'image1' }, { name:'image1' }] ) 
+//   -->upload.fields( [{ name:'image1' }, { name:'image2' }] ) 
 //      여러개의 요청 body 이름 아래 파일 하나씩 있는경우
 // app.post('/upload', upload.fields( [{ name:'image1' }, { name:'image1' }] ), (req, res) => { 
 //     console.log(req.file, req.body);

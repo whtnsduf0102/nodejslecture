@@ -1,14 +1,18 @@
+const dotenv = require('dotenv');
+dotenv.config();
+// dotenv 최대한 위로 올려주기
+
 const express = require('express');
 const path = require('path'); //경로처리
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const multer = require('multer');
-const dotenv = require('dotenv');
+
 
 const app = express();
 
-dotenv.config();
+
 app.set('port', process.env.PORT || 3000); //port를 전역변수로 사용
 
 app.use(morgan('dev')); //서버에서 어떤 요청이 왔는지 콘솔에 나타남 ex> GET / 200 12.016 ms - 207
@@ -27,8 +31,8 @@ app.use(sesssion({
 }));
 /** static 미들웨어 확장법 --------------------------------
 app.use('/',( req, res, next ) => { 
-    if(req.session.id){//로그인아이디가 있을때
-        express.static(__dirname, 'express')(req, res, next)
+    if(req.session.id){//로그인 한 경우에만 스테틱 실행
+        express.static(__dirname, 'express')(req, res, next);
     } else {
         naxt();
     }
