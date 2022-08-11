@@ -42,6 +42,3 @@ router.get('/:id/comments', async (req, res, next) => {
 });
 
 module.exports = router;
-
-
-//롤백테스트입니다.
