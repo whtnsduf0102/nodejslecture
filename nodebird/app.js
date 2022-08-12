@@ -6,6 +6,7 @@ const path = require('path');
 const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
+const passport = require('passport');
 
 //dotenv
 dotenv.config();
@@ -14,6 +15,7 @@ dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
 //express , port. view
 const app = express();
@@ -35,6 +37,8 @@ sequelize.sync({ force: false })
         console.error(err);
     });
 
+passportConfig();
+
 //미들웨어
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,6 +54,10 @@ app.use(session({
         secure: false,
     },
 }));
+
+//express-sessoin 보다 아래에 있어야 하며 미들웨어 라우터보다 위에 있어야함.
+app.use(passport.initialize());
+app.use(passport.session());
 
 //미들웨어 라우터연결
 app.use('/', pageRouter);
