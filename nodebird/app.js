@@ -14,6 +14,8 @@ dotenv.config();
 //라우터
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
+const userRouter = require('./routes/user');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
@@ -41,10 +43,11 @@ passportConfig();
 
 //미들웨어
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static( path.join(__dirname, 'public') ));
+app.use('/img', express.static( path.join(__dirname, 'uploads') ));
 app.use(express.json());
 app.use(express.urlencoded( { extended: true } ));
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser( process.env.COOKIE_SECRET ));
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -62,6 +65,8 @@ app.use(passport.session());
 //미들웨어 라우터연결
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
+app.use('/user', userRouter);
 
 // 404 처리 미들웨어
 app.use((req, res, next) => {

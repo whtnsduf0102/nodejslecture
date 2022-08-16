@@ -28,7 +28,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {  //회원가입 
 });
 
 //로그인은 세션문제, 카카오로그인, 이메일로그인 할 때 다른 점 등 다양한 문제가 있음. 하여 passport 를 이용하여 깔금하게 작성
-router.post('/login', isNotLoggedIn,(req, res, next) => { //미들웨어 확장하는 패턴
+router.post('/login', isNotLoggedIn, (req, res, next) => { //미들웨어 확장하는 패턴
   passport.authenticate('local', (authError, user, info) => {  // (passport.authenticate('local', 여기까지 실행되면서) localStrategy 로 찾아감 1번 
     if (authError) { //서버에러가 있는경우                       // ((authError, user, info) => {) LocalStrategy2번  여기서부터 실행됨
       console.error(authError);
@@ -49,9 +49,9 @@ router.post('/login', isNotLoggedIn,(req, res, next) => { //미들웨어 확장�
 });
 
 router.get('/logout', isLoggedIn, (req, res) => {
-  req.logout();
-  req.session.destroy();
-  res.redirect('/');
+  req.logout();  //req.user 객체를 제거
+  req.session.destroy(); // req.session 객체의 내용을 제거
+  res.redirect('/');  // 메인화면으로 redirect 
 });
 
 router.get('/kakao', passport.authenticate('kakao'));

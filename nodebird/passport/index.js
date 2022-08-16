@@ -10,7 +10,18 @@ module.exports = () => {
     });
 
     passport.deserializeUser((id, done) => { //user 전체 정보를 복구해줌
-        User.findOne({ where: { id } })
+        User.findOne({ 
+            where: { id },
+            include: [{
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followers',
+              }, {
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followings',
+              }],
+         })
             .then(user => done(null, user)) //req.user , req.isAuthenticated()
             .catch(err => done(err));
     });
